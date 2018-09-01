@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 389556998}
   m_Layer: 0
   m_Name: BoardManager
-  m_TagString: Untagged
+  m_TagString: Board Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,10 +141,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSprites:
-  - {fileID: 21300000, guid: e6bc15024430745468faea6237110323, type: 3}
-  - {fileID: 21300000, guid: 5aff99b1bf28b2c49ae03e17cf04d8d6, type: 3}
-  - {fileID: 21300000, guid: bdc363b58179e3248aeb8de67002e1d0, type: 3}
-  - {fileID: 21300000, guid: a0710d31342172344925a2d91fb664b8, type: 3}
+  - {fileID: 21300000, guid: 1a66a45691c386c44aa66620dc03bb5e, type: 3}
+  - {fileID: 21300000, guid: af3d0ad0c8c2541418bbba4c000562a4, type: 3}
+  - {fileID: 21300000, guid: 042e982ed6a9faf408be2bebf7e3c568, type: 3}
+  - {fileID: 21300000, guid: 7d7eccff61c77d14b8f4ea9c28fd0f44, type: 3}
   _titleSmallPrefab: {fileID: 1323590496731142, guid: 5e2a50e40a91577499cdafe7bb936863,
     type: 2}
   _titleNormalPrefab: {fileID: 1323590496731142, guid: 6743ecbd2127f9a4c85f29a34674afd9,
@@ -159,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 389556997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.99, y: -0.02, z: 0}
+  m_LocalPosition: {x: 5.99, y: -4.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -198,7 +198,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.4339623, g: 0.0757387, b: 0.0757387, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -242,3 +242,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2138464739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2138464740}
+  - component: {fileID: 2138464741}
+  m_Layer: 0
+  m_Name: SwapManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2138464740
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2138464739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2138464741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2138464739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4727328bed65c024eb16b66d2691d25c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
