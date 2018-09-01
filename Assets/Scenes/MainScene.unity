@@ -140,11 +140,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78ccaf733021d304caa44ed9c0c330ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameSprites: []
-  _titlePrefab: {fileID: 1323590496731142, guid: 5e2a50e40a91577499cdafe7bb936863,
+  _gameSprites:
+  - {fileID: 21300000, guid: e6bc15024430745468faea6237110323, type: 3}
+  - {fileID: 21300000, guid: 5aff99b1bf28b2c49ae03e17cf04d8d6, type: 3}
+  - {fileID: 21300000, guid: bdc363b58179e3248aeb8de67002e1d0, type: 3}
+  - {fileID: 21300000, guid: a0710d31342172344925a2d91fb664b8, type: 3}
+  _titleSmallPrefab: {fileID: 1323590496731142, guid: 5e2a50e40a91577499cdafe7bb936863,
+    type: 2}
+  _titleNormalPrefab: {fileID: 1323590496731142, guid: 6743ecbd2127f9a4c85f29a34674afd9,
     type: 2}
   _xTitles: 5
   _yTitles: 5
+  _startPosForGameBoard: {x: -4, y: -4}
 --- !u!4 &389556999
 Transform:
   m_ObjectHideFlags: 0
@@ -152,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 389556997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: -4, z: 0}
+  m_LocalPosition: {x: 5.99, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
