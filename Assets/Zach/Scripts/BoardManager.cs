@@ -17,6 +17,7 @@ public class BoardManager : MonoBehaviour
     private List<GameObject> holdingMasterObjects;
     private GameObject[,] gameBoard;
     private int[] numOfEachSprite;
+    private revolt revoltManager;
 
     public GameObject[,] getBoard()
     {
@@ -85,6 +86,8 @@ public class BoardManager : MonoBehaviour
                 }
             }
         }
+
+        revoltManager.startRiot();
         return true;
     }
 
@@ -94,8 +97,28 @@ public class BoardManager : MonoBehaviour
         ClearMasterBoard();
     }
 
+    public void StartRiot()
+    {
+        StartCoroutine(riotCoroutine());
+    }
+
+    private IEnumerator riotCoroutine()
+    {
+        for (int i = 0; i < _xTitles; i++)
+        {
+            for (int j = 0; j < _yTitles; j++)
+            {
+                masterBoard[i, j] = -1;
+                spriteManager temp = gameBoard[i, j].GetComponent<spriteManager>();
+                temp.Riot();
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+    }
+
 	private void Start ()
 	{
+	    revoltManager = GetComponent<revolt>();
 	    StartBoardGame();
 	}
 
@@ -201,6 +224,11 @@ public class BoardManager : MonoBehaviour
         {
             ClearGame();
             StartBoardGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+           revoltManager.startRiot();
         }
     }
 }

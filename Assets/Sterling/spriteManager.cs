@@ -11,12 +11,18 @@ public class spriteManager : MonoBehaviour {
     public float animationTime = 1;
     private float timeTracker = 0;
 
+    private bool bRioting = false;
+
     //variable that stores this object's type
     private int type;
 
     //variable for object's sprite renderer
     private SpriteRenderer render;
 
+    public void Riot()
+    {
+        bRioting = true;
+    }
     // Use this for initialization
     void Start ()
     {
@@ -37,15 +43,30 @@ public class spriteManager : MonoBehaviour {
             timeTracker = animationTime;
 
             //switch sprites
-            if (render.sprite == sprites1[type])
+            if (!bRioting)
             {
-                render.sprite = sprites2[type];
-            }
+                if (render.sprite == sprites1[type])
+                {
+                    render.sprite = sprites2[type];
+                }
 
+                else
+                {
+                    render.sprite = sprites1[type];
+                }
+            }
             else
             {
-                render.sprite = sprites1[type];
+                if (render.sprite == sprites1[types-1])
+                {
+                    render.sprite = sprites2[types - 1];
+                }
+                else
+                {
+                    render.sprite = sprites1[types - 1];
+                }
             }
+            
         }
 	}
 }

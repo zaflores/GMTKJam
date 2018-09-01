@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212546661946575428}
   - component: {fileID: 114727203358801524}
   - component: {fileID: 61179111232483992}
+  - component: {fileID: 114425426441301454}
   m_Layer: 0
   m_Name: TempSpritePrefab 1
   m_TagString: Untagged
@@ -67,6 +68,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114425426441301454
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1323590496731142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4948e1a697f54c345851633a0e6da1c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  types: 5
+  sprites1:
+  - {fileID: 21300000, guid: 1a66a45691c386c44aa66620dc03bb5e, type: 3}
+  - {fileID: 21300000, guid: af3d0ad0c8c2541418bbba4c000562a4, type: 3}
+  - {fileID: 21300000, guid: 042e982ed6a9faf408be2bebf7e3c568, type: 3}
+  - {fileID: 21300000, guid: 7d7eccff61c77d14b8f4ea9c28fd0f44, type: 3}
+  - {fileID: 21300000, guid: 08e6bd8a921ec6245a1aae57302e50af, type: 3}
+  sprites2:
+  - {fileID: 21300000, guid: 8efabaa2e98b3ac4fa2ff5e48867925f, type: 3}
+  - {fileID: 21300000, guid: 98b4efca7af453c48bc0a89f515bd774, type: 3}
+  - {fileID: 21300000, guid: 0d62afb5250243a4eaf4fab2bb25a2a2, type: 3}
+  - {fileID: 21300000, guid: 6b6d06cb3bca1a643961af3db1bf1274, type: 3}
+  - {fileID: 21300000, guid: 2d763c857b7894c43a831a1a0e33a959, type: 3}
+  animationTime: 0.5
 --- !u!114 &114727203358801524
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  isSelected: 0
 --- !u!212 &212546661946575428
 SpriteRenderer:
   m_ObjectHideFlags: 1
