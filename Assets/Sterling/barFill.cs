@@ -19,20 +19,27 @@ public class barFill : MonoBehaviour {
     //how much we add to the slider max per initial three;
     public float threesBuffer;
 
+    private revolt revoltManger;
     public void setInitialThrees(int threes)
     {
         initialThrees = threes;
     }
-
-    void Start()
-    {
-        revoltBar.value = 0.0f;
-        revoltBar.maxValue = maxBar + (threesBuffer * initialThrees);
-    }
-
     //call at end of every turn to fill revolt bar
     public void updateBar(int threesOnBoard)
     {
         revoltBar.value += threePenalty*threesOnBoard;
+        if (revoltBar.value >= revoltBar.maxValue)
+        {
+            revoltBar.value = revoltBar.maxValue;
+            revoltManger.startRiot();
+        }
+    }
+
+    public void resetBar(int initialThrees)
+    {
+        revoltManger = GetComponent<revolt>();
+        revoltBar.value = 0.0f;
+        setInitialThrees(initialThrees);
+        revoltBar.maxValue = maxBar + threesBuffer;
     }
 }
