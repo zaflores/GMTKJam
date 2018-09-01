@@ -12,12 +12,8 @@ public class revolt : MonoBehaviour {
     public Sprite[] rioters;
 
     public float animationTime = 1;
-    private float timeTracker = 0;
 
     public GameObject revoltImage;
-
-    private bool revolting = false;
-
     public void startRiot()
     {
         StartCoroutine(riotCoroutine());
@@ -47,38 +43,5 @@ public class revolt : MonoBehaviour {
     {
         boardManager = GetComponent<BoardManager>();
     }
-	
 	// Update is called once per frame
-	void Update ()
-    {/*
-        if (revolting)
-        {
-            //animation for rioters
-            timeTracker -= Time.deltaTime;
-
-            if (timeTracker <= 0)
-            {
-                timeTracker = animationTime;
-                for (int i = 0; i < rows; i++)
-                {
-                    for (int j = 0; j < cols; j++)
-                    {
-                        if (allObjects[i, j].GetComponent<SpriteRenderer>().sprite == rioters[0])
-                        {
-
-                            allObjects[i, j].GetComponent<SpriteRenderer>().sprite = rioters[1];
-                        }
-
-                        else
-                        {
-                            allObjects[i, j].GetComponent<SpriteRenderer>().sprite = rioters[0];
-                        }
-                    }
-                }
-            }
-        }
-        */
-    }
-
-
 }
