@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 389556999}
   - component: {fileID: 389556998}
+  - component: {fileID: 389557000}
   m_Layer: 0
   m_Name: BoardManager
   m_TagString: Board Manager
@@ -165,6 +166,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &389557000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 389556997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40d188e593caee643b413f436fa8d8d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rows: 5
+  cols: 5
+  rioters:
+  - {fileID: 21300000, guid: 08e6bd8a921ec6245a1aae57302e50af, type: 3}
+  - {fileID: 21300000, guid: 2d763c857b7894c43a831a1a0e33a959, type: 3}
+  animationTime: 0.5
+  revoltImage: {fileID: 2138464739}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
