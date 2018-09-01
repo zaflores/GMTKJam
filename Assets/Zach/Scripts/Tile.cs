@@ -21,8 +21,8 @@ public class Tile : MonoBehaviour
         this.type = type;
     }
 
-    public void GetType()
+    public int GetNumberType()
     {
-
+        return this.type;
     }
 }
