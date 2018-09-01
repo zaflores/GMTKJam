@@ -18,7 +18,7 @@ public class BoardManager : MonoBehaviour
     private GameObject[,] gameBoard;
     private int[] numOfEachSprite;
     private revolt revoltManager;
-
+    private barFill barFillManager;
     public GameObject[,] getBoard()
     {
         return gameBoard;
@@ -26,6 +26,7 @@ public class BoardManager : MonoBehaviour
 
     public void StartBoardGame()
     {
+        barFillManager = GetComponent<barFill>();
         holdingMasterObjects = new List<GameObject>();
         numOfEachSprite = new int[_gameSprites.Length];
         masterBoard = new int[_xTitles, _yTitles];
@@ -34,6 +35,7 @@ public class BoardManager : MonoBehaviour
         CreateInitialBoard(offset.x + 0.5f, offset.y + 0.5f);
         offset = _titleNormalPrefab.GetComponent<SpriteRenderer>().bounds.size;
         CreateGameBoard(offset.x + 0.5f, offset.y + 0.5f);
+        barFillManager.resetBar(CheckForThrees());
     }
 
     public int CheckForThrees()
@@ -95,25 +97,6 @@ public class BoardManager : MonoBehaviour
     {
         ClearGameBoard();
         ClearMasterBoard();
-    }
-
-    public void StartRiot()
-    {
-        StartCoroutine(riotCoroutine());
-    }
-
-    private IEnumerator riotCoroutine()
-    {
-        for (int i = 0; i < _xTitles; i++)
-        {
-            for (int j = 0; j < _yTitles; j++)
-            {
-                masterBoard[i, j] = -1;
-                spriteManager temp = gameBoard[i, j].GetComponent<spriteManager>();
-                temp.Riot();
-                yield return new WaitForSeconds(0.1f);
-            }
-        }
     }
 
 	private void Start ()

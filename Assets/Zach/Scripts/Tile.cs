@@ -63,7 +63,8 @@ public class Tile : MonoBehaviour
                 {
                     Swap(gameObject,previousTileSelected);
                     BoardManager manager = GameObject.FindWithTag("Board Manager").GetComponent<BoardManager>();
-                    manager.CheckForThrees();
+                    barFill tempBarFill = manager.gameObject.GetComponent<barFill>();
+                    tempBarFill.updateBar(manager.CheckForThrees());
                     if (manager.CheckForWin())
                     {
                         //win                                                                                                          
