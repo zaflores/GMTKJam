@@ -17,6 +17,7 @@ public class revolt : MonoBehaviour {
 
     private AudioSource audioSource;
     [SerializeField] private AudioSource songSource;
+    [SerializeField] private AudioClip riotEffect;
     public void startRiot()
     {
         StartCoroutine(riotCoroutine());
@@ -26,7 +27,6 @@ public class revolt : MonoBehaviour {
     {
         allObjects = boardManager.getBoard();
         songSource.Stop();
-        audioSource.Play();
         //make all people rioters
         for (int i = 0; i < rows; i++)
         {
@@ -36,11 +36,13 @@ public class revolt : MonoBehaviour {
                 spriteManager tempSpriteManager = allObjects[i, j].GetComponent<spriteManager>();
                 tempSpriteManager.Riot();
                 allObjects[i, j].GetComponent<BoxCollider2D>().enabled = false;
+                audioSource.PlayOneShot(riotEffect);
                 yield return new WaitForSeconds(0.1f);
             }
         }
         Instantiate(revoltImage, allObjects[rows / 2, cols / 2].transform);
         GetComponent<barFill>().ActivateUI();
+        audioSource.Play();
     }
 
 

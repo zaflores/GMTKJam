@@ -74,6 +74,7 @@ public class Tile : MonoBehaviour
                     BoardManager manager = GameObject.FindWithTag("Board Manager").GetComponent<BoardManager>();
                     barFill tempBarFill = manager.gameObject.GetComponent<barFill>();
                     tempBarFill.updateBar(manager.CheckForThrees());
+                    GameObject.FindWithTag("Board Manager").GetComponent<BoardManager>().SpawnAngries();
                     if (manager.CheckForWin())
                     {
                         manager.Win();

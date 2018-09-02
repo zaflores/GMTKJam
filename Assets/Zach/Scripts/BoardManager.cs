@@ -17,7 +17,6 @@ public class BoardManager : MonoBehaviour
     private List<GameObject> holdingMasterObjects;
     private GameObject[,] gameBoard;
     private int[] numOfEachSprite;
-    private revolt revoltManager;
     private barFill barFillManager;
     [SerializeField] private GameObject playAgainButton;
     [SerializeField] private GameObject menuAgainButton;
@@ -49,12 +48,53 @@ public class BoardManager : MonoBehaviour
         offset = _titleNormalPrefab.GetComponent<SpriteRenderer>().bounds.size;
         CreateGameBoard(offset.x + 0.25f, offset.y + 0.25f);
         riotSource.Stop();
-        songSource.clip = backtrack;
-        songSource.Play();
+        if (!songSource.isPlaying || songSource.clip == fanfare)
+        {
+            songSource.clip = backtrack;
+            songSource.Play();
+        }
         barFillManager.resetBar(CheckForThrees());
     }
 
     public int CheckForThrees()
+    {
+        int numThrees = 0;
+        //check for vertical 3's
+        for (int i = 0; i < _xTitles; i++)
+        {
+            for (int j = 1; j < _yTitles - 1; j++)
+            {
+                Tile tempTile1 = gameBoard[i, j].GetComponent<Tile>();
+                Tile tempTile2 = gameBoard[i, j + 1].GetComponent<Tile>();
+                Tile tempTile3 = gameBoard[i, j - 1].GetComponent<Tile>();
+                if (tempTile1.GetNumberType() == tempTile2.GetNumberType() &&
+                    tempTile1.GetNumberType() == tempTile3.GetNumberType())
+                {
+                    numThrees++;
+                    break;
+                }
+            }
+        }
+
+        for (int i = 0; i < _yTitles; i++)
+        {
+            for (int j = 1; j < _xTitles - 1; j++)
+            {
+                Tile tempTile1 = gameBoard[j, i].GetComponent<Tile>();
+                Tile tempTile2 = gameBoard[j + 1, i].GetComponent<Tile>();
+                Tile tempTile3 = gameBoard[j - 1, i].GetComponent<Tile>();
+                if (tempTile1.GetNumberType() == tempTile2.GetNumberType() &&
+                    tempTile1.GetNumberType() == tempTile3.GetNumberType())
+                {
+                    numThrees++;
+                    break;
+                }
+            }
+        }
+        return numThrees;
+    }
+
+    public void SpawnAngries()
     {
         int numThrees = 0;
         //check for vertical 3's
@@ -74,8 +114,6 @@ public class BoardManager : MonoBehaviour
                     Instantiate(angryEffectGameObject, toSpawn, transform.rotation);
                     toSpawn = tempTile3.gameObject.transform.position + new Vector3(0, .5f, -1);
                     Instantiate(angryEffectGameObject, toSpawn, transform.rotation);
-                    numThrees++;
-                    break;
                 }
             }
         }
@@ -101,7 +139,6 @@ public class BoardManager : MonoBehaviour
                 }
             }
         }
-        return numThrees;
     }
     public bool CheckForWin()
     {
@@ -125,7 +162,6 @@ public class BoardManager : MonoBehaviour
         ClearMasterBoard();
         StartBoardGame();
         playAgainButton.SetActive(false);
-        menuAgainButton.SetActive(false);
         Destroy(tempVictoryText);
     }
 
@@ -147,14 +183,12 @@ public class BoardManager : MonoBehaviour
             }
         }
         playAgainButton.SetActive(true);
-        menuAgainButton.SetActive(true);
         songSource.clip = fanfare;
         songSource.Play();
     }
 
     private void Start ()
 	{
-	    revoltManager = GetComponent<revolt>();
 	    riotSource = GetComponent<AudioSource>();
 	}
 
@@ -253,12 +287,15 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-    //fuk u
+
     private void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.W))
         {
+            Debug.LogWarning("tAKE tHIS SHIT OUT");
             Win();
         }
+        
     }
 }

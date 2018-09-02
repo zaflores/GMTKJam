@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PalmTileGenerator : MonoBehaviour
 {
+    /*
     [SerializeField] private GameObject tilePrefab;
 
     [SerializeField] private int xTiles;
@@ -26,4 +27,5 @@ public class PalmTileGenerator : MonoBehaviour
 	void Update () {
 		
 	}
+    */
 }
