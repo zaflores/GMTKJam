@@ -14,6 +14,9 @@ public class revolt : MonoBehaviour {
     public float animationTime = 1;
 
     public GameObject revoltImage;
+
+    private AudioSource audioSource;
+    [SerializeField] private AudioSource songSource;
     public void startRiot()
     {
         StartCoroutine(riotCoroutine());
@@ -22,6 +25,8 @@ public class revolt : MonoBehaviour {
     private IEnumerator riotCoroutine()
     {
         allObjects = boardManager.getBoard();
+        songSource.Stop();
+        audioSource.Play();
         //make all people rioters
         for (int i = 0; i < rows; i++)
         {
@@ -35,6 +40,7 @@ public class revolt : MonoBehaviour {
             }
         }
         Instantiate(revoltImage, allObjects[rows / 2, cols / 2].transform);
+        GetComponent<barFill>().ActivateUI();
     }
 
 
@@ -42,6 +48,7 @@ public class revolt : MonoBehaviour {
     void Start ()
     {
         boardManager = GetComponent<BoardManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 	// Update is called once per frame
 }

@@ -19,6 +19,19 @@ public class BoardManager : MonoBehaviour
     private int[] numOfEachSprite;
     private revolt revoltManager;
     private barFill barFillManager;
+    [SerializeField] private GameObject playAgainButton;
+    [SerializeField] private GameObject menuAgainButton;
+    [SerializeField] private GameObject angryEffectGameObject;
+
+    [SerializeField] private GameObject winText;
+    private GameObject tempVictoryText;
+
+    [SerializeField] private AudioSource songSource;
+    private AudioSource riotSource;
+
+    [SerializeField] private AudioClip fanfare;
+    [SerializeField] private AudioClip backtrack;
+
     public GameObject[,] getBoard()
     {
         return gameBoard;
@@ -32,9 +45,12 @@ public class BoardManager : MonoBehaviour
         masterBoard = new int[_xTitles, _yTitles];
         gameBoard = new GameObject[_xTitles, _yTitles];
         Vector2 offset = _titleSmallPrefab.GetComponent<SpriteRenderer>().bounds.size;
-        CreateInitialBoard(offset.x + 0.5f, offset.y + 0.5f);
+        CreateInitialBoard(offset.x, offset.y);
         offset = _titleNormalPrefab.GetComponent<SpriteRenderer>().bounds.size;
-        CreateGameBoard(offset.x + 0.5f, offset.y + 0.5f);
+        CreateGameBoard(offset.x + 0.25f, offset.y + 0.25f);
+        riotSource.Stop();
+        songSource.clip = backtrack;
+        songSource.Play();
         barFillManager.resetBar(CheckForThrees());
     }
 
@@ -52,6 +68,12 @@ public class BoardManager : MonoBehaviour
                 if (tempTile1.GetNumberType() == tempTile2.GetNumberType() &&
                     tempTile1.GetNumberType() == tempTile3.GetNumberType())
                 {
+                    Vector3 toSpawn = tempTile1.gameObject.transform.position + new Vector3(0, .5f, -1);
+                    Instantiate(angryEffectGameObject, toSpawn, transform.rotation);
+                    toSpawn = tempTile2.gameObject.transform.position + new Vector3(0, .5f, -1);
+                    Instantiate(angryEffectGameObject, toSpawn, transform.rotation);
+                    toSpawn = tempTile3.gameObject.transform.position + new Vector3(0, .5f, -1);
+                    Instantiate(angryEffectGameObject, toSpawn, transform.rotation);
                     numThrees++;
                     break;
                 }
@@ -68,6 +90,12 @@ public class BoardManager : MonoBehaviour
                 if (tempTile1.GetNumberType() == tempTile2.GetNumberType() &&
                     tempTile1.GetNumberType() == tempTile3.GetNumberType())
                 {
+                    Vector3 toSpawn = tempTile1.gameObject.transform.position + new Vector3(0, .5f, -1);
+                    Instantiate(angryEffectGameObject, toSpawn, transform.rotation);
+                    toSpawn = tempTile2.gameObject.transform.position + new Vector3(0, .5f, -1);
+                    Instantiate(angryEffectGameObject, toSpawn, transform.rotation);
+                    toSpawn = tempTile3.gameObject.transform.position + new Vector3(0, .5f, -1);
+                    Instantiate(angryEffectGameObject, toSpawn, transform.rotation);
                     numThrees++;
                     break;
                 }
@@ -88,8 +116,6 @@ public class BoardManager : MonoBehaviour
                 }
             }
         }
-
-        revoltManager.startRiot();
         return true;
     }
 
@@ -97,12 +123,39 @@ public class BoardManager : MonoBehaviour
     {
         ClearGameBoard();
         ClearMasterBoard();
+        StartBoardGame();
+        playAgainButton.SetActive(false);
+        menuAgainButton.SetActive(false);
+        Destroy(tempVictoryText);
     }
 
-	private void Start ()
+    public void ClearVisuals()
+    {
+        ClearGameBoard();
+        ClearMasterBoard();
+        Destroy(tempVictoryText);
+    }
+
+    public void Win()
+    {
+        tempVictoryText = Instantiate(winText, Vector3.zero + new Vector3(0,0,-9f), transform.rotation);
+        for (int i = 0; i < _xTitles; i++)
+        {
+            for (int j = 0; j < _yTitles; j++)
+            {
+                gameBoard[i, j].GetComponent<BoxCollider2D>().enabled = false;
+            }
+        }
+        playAgainButton.SetActive(true);
+        menuAgainButton.SetActive(true);
+        songSource.clip = fanfare;
+        songSource.Play();
+    }
+
+    private void Start ()
 	{
 	    revoltManager = GetComponent<revolt>();
-	    StartBoardGame();
+	    riotSource = GetComponent<AudioSource>();
 	}
 
     private void CreateInitialBoard(float offsetX, float offsetY)
@@ -200,18 +253,12 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
-
+    //fuk u
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            ClearGame();
-            StartBoardGame();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-           revoltManager.startRiot();
+            Win();
         }
     }
 }

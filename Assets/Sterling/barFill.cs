@@ -20,6 +20,9 @@ public class barFill : MonoBehaviour {
     public float threesBuffer;
 
     private revolt revoltManger;
+
+    [SerializeField] private GameObject playAgainButton;
+    [SerializeField] private GameObject menuAgainButton;
     public void setInitialThrees(int threes)
     {
         initialThrees = threes;
@@ -27,6 +30,7 @@ public class barFill : MonoBehaviour {
     //call at end of every turn to fill revolt bar
     public void updateBar(int threesOnBoard)
     {
+        Debug.Log(threesOnBoard);
         revoltBar.value += threePenalty*threesOnBoard;
         if (revoltBar.value >= revoltBar.maxValue)
         {
@@ -40,6 +44,12 @@ public class barFill : MonoBehaviour {
         revoltManger = GetComponent<revolt>();
         revoltBar.value = 0.0f;
         setInitialThrees(initialThrees);
-        revoltBar.maxValue = maxBar + threesBuffer;
+        revoltBar.maxValue = maxBar + (threesBuffer*this.initialThrees);
+    }
+
+    public void ActivateUI()
+    {
+        playAgainButton.SetActive(true);
+        menuAgainButton.SetActive(true);
     }
 }

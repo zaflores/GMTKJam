@@ -11,19 +11,22 @@ public class Tile : MonoBehaviour
     [SerializeField]
     private int type;
 
+    [SerializeField] private AudioClip selectClip;
+    [SerializeField] private AudioClip swapClip;
+    private AudioSource audioSource;
+
     private int xCoord;
     private int yCoord;
 
     public bool isSelected = false;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+	
 
     public void SetType(int type)
     {
@@ -48,6 +51,10 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
+        StartCoroutine(OnMouseDownCoroutine());
+    }
+    private IEnumerator OnMouseDownCoroutine()
+    {
         if (isSelected)
         {
             previousTileSelected = null;
@@ -61,13 +68,15 @@ public class Tile : MonoBehaviour
             {
                 if(CheckForValidSwap(gameObject,previousTileSelected))
                 {
+                    audioSource.PlayOneShot(swapClip,4.0f);
                     Swap(gameObject,previousTileSelected);
+                    yield return new WaitForSeconds(.3f);
                     BoardManager manager = GameObject.FindWithTag("Board Manager").GetComponent<BoardManager>();
                     barFill tempBarFill = manager.gameObject.GetComponent<barFill>();
                     tempBarFill.updateBar(manager.CheckForThrees());
                     if (manager.CheckForWin())
                     {
-                        //win                                                                                                          
+                        manager.Win();
                     }
                     tileAlreadySelected = false;
                     previousTileSelected.transform.localScale -= new Vector3(.2f, .2f, 0);
@@ -87,6 +96,7 @@ public class Tile : MonoBehaviour
             }
             else
             {
+                audioSource.PlayOneShot(selectClip,0.25f);
                 tileAlreadySelected = true;
                 previousTileSelected = gameObject;
                 isSelected = true;
