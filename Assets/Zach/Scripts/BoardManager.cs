@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class BoardManager : MonoBehaviour
 {
-
+    //written by zach
     [SerializeField] private Sprite[] _gameSprites;
     [SerializeField] private GameObject _titleSmallPrefab;
     [SerializeField] private GameObject _titleNormalPrefab;
